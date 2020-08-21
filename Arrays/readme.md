@@ -33,11 +33,11 @@ Block swap algorithm for array rotation
 Initialize A = arr[0..d-1] and B = arr[d..n-1]
 1) Do following until size of A is equal to size of B
 
-  a)  If A is shorter, divide B into Bl and Br such that Br is of same 
+  a)  If A is shorter, divide B into Bl and Br such that Br is of same
        length as A. Swap A and Br to change ABlBr into BrBlA. Now A
-       is at its final place, so recur on pieces of B.  
+       is at its final place, so recur on pieces of B.
 
-   b)  If A is longer, divide A into Al and Ar such that Al is of same 
+   b)  If A is longer, divide A into Al and Ar such that Al is of same
        length as B Swap Al and B to change AlArB into BArAl. Now B
        is at its final place, so recur on pieces of A.
 
@@ -53,3 +53,25 @@ Following are steps.
 1) Store last element in a variable say x.
 2) Shift all elements one position ahead.
 3) Replace first element of array with x.
+
+
+
+Search an element in a sorted and rotated array
+Last Updated: 28-07-2020
+An element in a sorted array can be found in O(log n) time via binary search. But suppose we rotate an ascending order sorted array at some pivot unknown to you beforehand. So for instance, 1 2 3 4 5 might become 3 4 5 1 2. Devise a way to find an element in the rotated array in O(log n) time.
+
+
+
+Improved Solution:
+Approach: Instead of two or more pass of binary search the result can be found in one pass of binary search. The binary search needs to be modified to perform the search. The idea is to create a recursive function that takes l and r as range in input and the key.
+
+1) Find middle point mid = (l + h)/2
+2) If key is present at middle point, return mid.
+3) Else If arr[l..mid] is sorted
+    a) If key to be searched lies in range from arr[l]
+       to arr[mid], recur for arr[l..mid].
+    b) Else recur for arr[mid+1..h]
+4) Else (arr[mid+1..h] must be sorted)
+    a) If key to be searched lies in range from arr[mid+1]
+       to arr[h], recur for arr[mid+1..h].
+    b) Else recur for arr[l..mid] 
